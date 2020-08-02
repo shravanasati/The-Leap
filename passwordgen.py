@@ -37,56 +37,21 @@ try:
     digits = int(input("How many digit password do you want? "))
     if digits == 6:
         print ("A strong password for", purpose, "could be", pass6)
-        f = open('passwords.txt', 'a')
-        pass_update_r = ("Your " + purpose +" "+ "password is ")
-        pass_update = str(pass_update_r + pass6 + "\n")
-        f.write(pass_update)
-        f.close
-        print ("This password is stored in your computer for future use.")
-
-
+      
     elif digits == 7:
         print ("A strong password for", purpose, "could be", pass7)
-        f = open('passwords.txt', 'a')
-        pass_update_r = ("Your " + purpose +" "+ "password is ")
-        pass_update = str(pass_update_r + pass7 + "\n")
-        f.write(pass_update)
-        f.close
-        print ("This password is stored in your computer for future use.")
-
-
+       
     elif digits == 8:
         print ("A strong password for", purpose, "could be", pass8)
-        f = open('passwords.txt', 'a')
-        pass_update_r = ("Your " + purpose +" " + "password is ")
-        pass_update = str(pass_update_r + pass8 +""+ "\n")
-        f.write(pass_update)
-        f.close
-        print ("This password is stored in your computer for future use.")
-   
-
+     
     elif digits == 9:
         print ("A strong password for", purpose, "could be", pass9)
-        f = open('passwords.txt', 'a')
-        pass_update_r = ("Your " + purpose +" "+ "password is ")
-        pass_update = str(pass_update_r + pass9 + "\n")
-        f.write(pass_update)
-        f.close
-        print ("This password is stored in your computer for future use.")
-
-
+      
     elif digits == 10:
         print ("A strong password for", purpose, "could be", pass10)
-        f = open('passwords.txt', 'a')
-        pass_update_r = ("Your " + purpose +" "+ "password is ")
-        pass_update = str(pass_update_r + pass10 + "\n")
-        f.write(pass_update)
-        f.close
-        print ("This password is stored in your computer for future use.")
-
 
     else:
-        print ("Password length limit too low or too higher!")
+        print ("Invalid input!")
         print ("Try again!")
     
         
