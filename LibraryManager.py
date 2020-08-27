@@ -1,14 +1,3 @@
-# TO DO::::
-# Create a library class
-# display book
-# lend book - (who owns the book if not present)
-# add book
-# return book
-
-# HarryLibrary = Library(listofbooks, library_name)
-# dictionary (books-nameofperson)
-# create a main function and run an infinite while loop asking users for their input
-
 class Library:
     lenders = {}
     donors = {}
@@ -46,7 +35,7 @@ class Library:
         self.booklist.append(newbook)
         self.donors.update({kindname.capitalize():newbook})
     
-Shravan_Lib = Library(["COD Mobile", "PUBG Mobile", "Free Fire", "Hopeless"], "Gamers", {}, {})
+Shravan_Lib = Library(["Factfulness", "Think and Grow Rich", "Rich Dad Poor Dad", "Enlightenment Now", "To Sell is Human"], "Leap ahead", {}, {})
 
 if __name__ == "__main__":
     while True:
