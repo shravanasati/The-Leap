@@ -67,6 +67,7 @@ try:
             print ("Password length limit too low or too higher!\nTry again!")
         
 
+# PIN
     elif pin_word==2:
         def pin():
             n = random.choice(numbers)
@@ -77,8 +78,10 @@ try:
                 n = random.choice(numbers)
             return pin
 
-        print("A strong PIN for", purpose, "could be", pin())
-        save(f"Your {purpose} pin is {(pin)}\n")
+        p = pin()
+
+        print("A strong PIN for", purpose, "could be", p)
+        save(f"Your {purpose} pin is {p}\n")
             
 except Exception as e:
     print (e)
