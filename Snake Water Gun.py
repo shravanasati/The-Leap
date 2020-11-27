@@ -3,10 +3,13 @@ import random
 def snake_water_gun():
     
     def music(file):
-        from pygame import mixer
-        mixer.init()
-        mixer.music.load(file)
-        mixer.music.play()
+        try:
+            from pygame import mixer
+            mixer.init()
+            mixer.music.load(file)
+            mixer.music.play()
+        except Exception as e:
+            print(e)
 
     win_musiclist = ["anime wow.mp3", "bruhh.mp3"]
     lose_musiclist = ["Nope.mp3", "Fart.mp3"]
