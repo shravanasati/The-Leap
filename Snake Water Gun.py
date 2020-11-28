@@ -2,17 +2,6 @@
 import random
 def snake_water_gun():
     
-    def music(file):
-        try:
-            from pygame import mixer
-            mixer.init()
-            mixer.music.load(file)
-            mixer.music.play()
-        except Exception as e:
-            print(e)
-
-    win_musiclist = ["anime wow.mp3", "bruhh.mp3"]
-    lose_musiclist = ["Nope.mp3", "Fart.mp3"]
 
     def getdate():
         import datetime
@@ -35,57 +24,47 @@ def snake_water_gun():
 
     try:
         while chances>0:
-            win_music = random.choice(win_musiclist)
-            lose_music = random.choice(lose_musiclist)
             item_choice = random.choice(items)
 
             a = input("What's your choice? ")
 
             if a in ["s", "S"] and item_choice == "Snake":
                 print ("Tie")
-                music("Awkward Cricket.mp3")
                 ties = ties+1
                 chances = chances - 1
             elif a in ["s", "S"] and item_choice == "Gun":
                 print ("You lost this time")
-                music(lose_music)
                 score_comp = score_comp +1
                 chances = chances - 1
             elif a in ["s", "S"] and item_choice == "Water":
                 print ("You won this time")
-                music(win_music)
                 score_user = score_user+1
                 chances = chances - 1
 
             elif a in ["w", "W"] and item_choice == "Snake":
                 print ("You lost this time")
-                music(lose_music)
                 score_comp += 1
                 chances = chances - 1
             elif a in ["w", "W"] and item_choice == "Gun":
                 print ("You won this time")
-                music(win_music)
                 score_user += 1
                 chances = chances - 1
             elif a in ["w", "W"] and item_choice == "Water":
                 print ("Tie")
-                music("Awkward Cricket.mp3")
+   
                 ties = ties+1
                 chances = chances - 1
 
             elif a in ["g", "G"] and item_choice == "Snake":
                 print ("You won this time")
-                music(win_music)
                 score_user += 1
                 chances = chances - 1
             elif a in ["g", "G"] and item_choice == "Gun":
                 print ("Tie")
-                music("Awkward Cricket.mp3")
                 ties = ties+1
                 chances = chances - 1
             elif a in ["g", "G"] and item_choice == "Water":
                 print ("You lost this time")
-                music(lose_music)
                 score_comp = score_comp+1
                 chances = chances - 1
 
@@ -95,7 +74,6 @@ def snake_water_gun():
 
             if chances == 0:
 
-                music("piano result.mp3")
                 print ("Game over! Let's take look at the scores:")
 
                 print ("Your score=", score_user)
