@@ -5,6 +5,3 @@ This repository contains some of my beginner and intermediate-level python proje
 3. Password generator
 4. Snake-water-gun game
 5. Healthy Programmer
-
-
-Download the music files for the Snake Water Gun game from the Muisc files folder.
