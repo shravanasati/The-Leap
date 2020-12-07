@@ -29,7 +29,9 @@ while chances>0:
         speak(f"{chances} Chances left")
         quit()
         
-
+    elif guess<0 or guess>100:
+        print("Please, Enter the number only between 0 and 100")
+        
     elif guess>n:
         print ("**Decrease your number**")
         speak("Decrease your number")
@@ -43,7 +45,6 @@ while chances>0:
         chances -= 1
         print("Chances left=", chances)
         speak(f"{chances} chances left")
-
 
     else:
         print("Invalid input!")
