@@ -1,5 +1,5 @@
 import random
-# importing the pyttsx library 
+#importing the pyttsx library 
 import pyttsx3 
 
 def speak(string):
@@ -28,7 +28,11 @@ while chances>0:
         print("Chances left=", chances)
         speak(f"{chances} Chances left")
         quit()
-        
+    
+    elif guess>100 or guess<0:
+        print("Please, Enter the number between 0 and 100")
+        chances -= 1
+        print("Chances left=", chances)
 
     elif guess>n:
         print ("**Decrease your number**")
@@ -44,11 +48,10 @@ while chances>0:
         print("Chances left=", chances)
         speak(f"{chances} chances left")
 
-
     else:
         print("Invalid input!")
         speak("Invalid input!")
 
     if chances == 0:
         print("The answer was", n)
-        speak(f"The answer was {n}")
+        #speak(f"The answer was {n}")
