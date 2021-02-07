@@ -1,88 +1,95 @@
-#lists
-alphabets_C = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+import string, random, pyperclip
 
-alphabets_S = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+capitals = string.ascii_uppercase
+smalls = string.ascii_lowercase
+numbers = string.digits
+symbols = string.punctuation
+print(symbols)
 
-numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+def save(account, password, mode):
+    with open(r"passwords.txt", 'a') as f:
+        if mode == "password":
+            f.write(f"Your {account} password is {password}\n")
 
-symbols = ["!", "@", "#", "$", "%", "&"]
-
-#variable random
-import random
-ALPHABET = random.choice(alphabets_C)
-alphabet1 = random.choice(alphabets_S)
-Number1 = random.choice(numbers)
-Symbol1 = random.choice(symbols)
-alphabet2 = random.choice(alphabets_S)
-Number2 = random.choice(numbers)
-alphabet3 = random.choice(alphabets_S)
-Number3 = random.choice(numbers)
-Symbol2 = random.choice(symbols)
-ALPHABET2 = random.choice(alphabets_C)
-
-#password lengths
-pass6 = ALPHABET+alphabet1+Number1+Number2+Symbol1+alphabet2
-pass7 = ALPHABET+alphabet1+Number1+Number2+Symbol1+alphabet2+Number3
-pass8 = ALPHABET+alphabet1+Number1+Number2+Symbol1+alphabet2+Symbol2+Number3
-pass9 = ALPHABET+alphabet1+Number1+Number2+Symbol1+alphabet2+Number3+Symbol2+alphabet3
-pass10 = ALPHABET+alphabet1+Number1+Number2+Symbol1+ALPHABET2+alphabet2+Symbol2+alphabet3+Number3
-
-def save(txt):
-    with open('passwords.txt', 'a') as f:
-        f.write(txt)
-    print("This password/pin is stored in your computer for future use!")
-
-#main
-print ("This is the password/pin generator!")
-print ("Note: Minimum password length is 6 whereas maximum of that is 10.")
-
-pin_word = int(input("\n1.Password\n2.Pin\n(1/2) "))
-
-purpose = input("For which account is this password? ")
-
-try:
-    if pin_word==1:
-        digits = int(input("How many digit password do you want? "))
-        if digits == 6:
-            print ("A strong password for", purpose, "could be", pass6)
-            save(f"Your {purpose} password is {pass6}\n")
-
-        elif digits == 7:
-            print ("A strong password for", purpose, "could be", pass7)
-            save(f"Your {purpose} password is {pass7}\n")
-
-        elif digits == 8:
-            print ("A strong password for", purpose, "could be", pass8)
-            save(f"Your {purpose} password is {pass8}\n")
-
-        elif digits == 9:
-            print ("A strong password for", purpose, "could be", pass9)
-            save(f"Your {purpose} password is {pass9}\n")
-
-        elif digits == 10:
-            print ("A strong password for", purpose, "could be", pass10)
-            save(f"Your {purpose} password is {pass10}\n")
+        elif mode == "pin":
+            f.write(f"Your {account} pin is {password}\n")
 
         else:
-            print ("Password length limit too low or too higher!\nTry again!")
-        
+            print("Invalid mode!")
 
-# PIN
-    elif pin_word==2:
-        def pin():
-            n = random.choice(numbers)
-            pin = random.choice(numbers)
-            d = int(input("Digits: "))
-            for i in range(1, d):
-                pin = pin + n
-                n = random.choice(numbers)
-            return pin
+    pyperclip.copy(password)
+    print("This password/pin is stored in your computer for future use!")
 
-        p = pin()
+def retrieve(account):
+    with open(r"passwords.txt") as f:
+        fc = f.read().split("\n")
 
-        print("A strong PIN for", purpose, "could be", p)
-        save(f"Your {purpose} pin is {p}\n")
-            
-except Exception as e:
-    print (e)
-    quit()
+    for lines in fc:
+        acc = lines.replace("Your", "").replace("password", "").replace("pin", "").replace("is", "").lstrip().rstrip().split(" ")[0]
+        if account.lower() == acc.lower():
+            pw = lines.split(" ")[-1]
+            pyperclip.copy(pw)
+            return f"Password for {account} is `{pw}`."
+
+    return "Found no password corresponding with {}".format(account)
+
+def pin(length):
+    n = random.choice(numbers)
+    pin = random.choice(numbers)
+    for _ in range(length-1):
+        pin = pin + n
+        n = random.choice(numbers)
+    return pin
+
+def password(length):
+    if length <= 4:
+        print("Password length less than the minimum length 4.")
+        quit()
+    passw = random.choice(capitals) + random.choice(smalls) + random.choice(numbers) + random.choice(symbols)
+
+    while len(passw) < length:
+        next_chars = [random.choice(capitals), random.choice(smalls), random.choice(numbers), random.choice(symbols)]
+        passw += random.choice(next_chars)
+
+    return passw
+
+if __name__ == "__main__":
+    print("\nThis is the password/pin generator!\n\n")
+    task = int(input("What do you want to do? \n 1. Generate password/pin \n 2. Retrieve password/pin \n"))
+
+    if task == 1:
+        print("Note: Minimum password length is 4.")
+
+        pin_word = int(input("\nWhat to generate? \n 1.Password \n 2.Pin \n (1/2) "))
+
+
+        if pin_word==1:
+            purpose = input("For which account is this password? ")
+
+            while True:
+                length = int(input("How long password do you want? "))
+                pw = password(length)
+                print(f"A strong password for {purpose} could be {pw}.")
+                satisfied = input("Are you satisfied with the password? If no then new password would be generated.(y/n) ")
+                if satisfied.lower() != "n":
+                    save(purpose, pw, "password")
+                    break
+
+        elif pin_word==2:
+            purpose = input("For which account is this password? ")
+
+            while True:
+                length = int(input("How long password do you want? "))
+                p = pin(length)
+                print("A strong PIN for", purpose, "could be", p)
+                satisfied = input("Are you satisfied with the password? If no then new pin would be generated.(y/n) ")
+                if satisfied.lower() != "n":
+                    save(purpose, p, "pin")
+                    break
+
+    elif task == 2:
+        acc = input("Which account's password to retrieve? ")
+        print(retrieve(acc))
+
+    else:
+        print("Invalid input!")
