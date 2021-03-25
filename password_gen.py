@@ -4,7 +4,6 @@ capitals = string.ascii_uppercase
 smalls = string.ascii_lowercase
 numbers = string.digits
 symbols = string.punctuation
-print(symbols)
 
 def save(account, password, mode):
     with open(r"passwords.txt", 'a') as f:
