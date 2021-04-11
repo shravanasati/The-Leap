@@ -6,9 +6,11 @@
 
 import pygame
 from time import time
+from os import chdir
+
 def getdate():
-    import datetime
-    return str(datetime.datetime.now())
+    from datetime import datetime
+    return str(datetime.now())
 date = getdate()
 
 def music_loop(file, stopper):
@@ -29,6 +31,7 @@ def log(txt):
 
 
 if __name__ == "__main__":
+    chdir(r"C:/Users/Admin/Documents/The-Leap")
     init_water = time()
     init_eyes = time()
     init_exercise = time()
